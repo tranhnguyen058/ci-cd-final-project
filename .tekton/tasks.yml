@@ -26,15 +26,16 @@ spec:
         rm -rf "${WORKSPACE_SOURCE_PATH}"/.[!.]*
         rm -rf "${WORKSPACE_SOURCE_PATH}"/..?*
       fi
+
 --- 
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
- - name: nose
+ name: nose
 spec:
  description: for Testing purpose
  workspaces: 
-  name: source 
+  - name: source 
  params:
   - name: args
     description: Arguments to pass to nose
@@ -50,5 +51,5 @@ spec:
       python -m pip install --upgrade pip wheel
       pip install -r requirements.txt
       nosetests $(params.args)
-      
+
 
